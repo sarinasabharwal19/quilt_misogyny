@@ -44,14 +44,7 @@ if __name__ == '__main__':
     import pandas as pd
     import re
     tj = TwitterJoy()
-    data = pd.read_excel("60747bb127a3161b1ada2a36-518_output.xlsx")
-    data = data.drop_duplicates(subset=['text'])
-    
-    for i,v in data.iterrows():
-        x = data['text'][i]
-        x = str(x)
-        x = re.sub('@[^\s]+','',x)
-        data['text'][i] = ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)"," ", x).split())
-    #print(data)
-    data["roberta predictions"] = data["text"].apply(lambda x: tj.getJoyCode(x))
-    data.to_csv("/content/misogyny_predictions.csv",index=False)
+    data = pd.read_csv("tox_output.csv')
+    data.loc[data['Misogyny']=='True', 'Predictions'] =  data["text"].apply(lambda x: tj.getJoyCode(x))             
+    #data["roberta predictions"] = data["text"].apply(lambda x: tj.getJoyCode(x))
+    data.to_csv("predictions.csv",index=False)

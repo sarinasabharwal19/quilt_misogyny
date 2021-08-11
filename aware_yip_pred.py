@@ -44,7 +44,7 @@ if __name__ == '__main__':
     import pandas as pd
     import re
     tj = TwitterJoy()
-    data = pd.read_csv("tox_output.csv')
+    data = pd.read_csv("tox_output.csv")
     data.loc[data['Misogyny']=='True', 'Predictions'] =  data["text"].apply(lambda x: tj.getJoyCode(x))             
     #data["roberta predictions"] = data["text"].apply(lambda x: tj.getJoyCode(x))
     data.to_csv("predictions.csv",index=False)
